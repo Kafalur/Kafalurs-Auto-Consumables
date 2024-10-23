@@ -33,10 +33,10 @@ local consumable_options = {
   --- Tier 2 elixir internal names
   t2_elixir_options = {
     "Elixir_Precision_5",     -- Elixir of Precision II
-    "Elixir_SpeedAndLuck_2",  -- Elixir of Speed and Luck II (Elixir of Advantage II)
+    "Elixir_SpeedAndLuck_2",  -- Elixir of Elixir of Advantage II
     "Elixir_Destruction_2",   -- Elixir of Destruction II
     "Elixir_Resources_2",     -- Elixir of Resource Enhancement II
-    "Elixir_MaxLife_2",       -- Elixir of Maximum Life II (Elixir of Fortitude II)
+    "Elixir_MaxLife_2",       -- Elixir of Elixir of Fortitude II
     "Elixir_Ironbarb_5",      -- Elixir of Iron Barbs II
     "Elixir_ShadowResist_5",  -- Elixir of Shadow Resistance II
     "Elixir_PoisonResist_5",  -- Elixir of Poison Resistance II
@@ -47,22 +47,22 @@ local consumable_options = {
 
   --- Tier 1 incense internal names
   t1_incense_options = {
-    "Incense_I_00",  -- Ancient Times
-    "Incense_I_01",  -- Blessed Guide
-    "Incense_I_02",  -- Desert Escape
-    "Incense_I_03",  -- Queen's Supreme
-    "Incense_I_04",  -- Sage's Whisper
-    "Incense_I_05",  -- Song of the Mountain
-    "Incense_I_06",  -- Spirit Dance
-    "Incense_I_07",  -- Storm of the Wilds
+    "Incense_I_00",  -- Storm of the Wilds
+    "Incense_I_01",  -- Desert Escape
+    "Incense_I_02",  -- Song of the Mountain
+    "Incense_I_03",  -- Spirit Dance
+    "Incense_I_04",  -- Ancient Times
+    "Incense_I_05",  -- Sage's Whisper
+    "Incense_I_06",  -- Queen's Supreme
+    "Incense_I_07",  -- Blessed Guide
   },
 
   --- Tier 2 incense internal names
   t2_incense_options = {
     "Incense_II_00", -- Reddamine Buzz
-    "Incense_II_01", -- Scents of the Desert Afternoon
-    "Incense_II_02", -- Soothing Spices
-    "Incense_II_03", -- Spiral Morning
+    "Incense_II_01", -- Soothing Spices
+    "Incense_II_02", -- Spiral Morning
+    "Incense_II_03", -- Scents of the Desert Afternoon
   },
 
   --- Tier 3 incense internal names
@@ -73,11 +73,11 @@ local consumable_options = {
 
   --- Opal internal names
   opal_options = {
-    "S06_RealmWalker_DungeonOfHatred_Shrine_00",  -- Seething Opal of Gold
-    "S06_RealmWalker_DungeonOfHatred_Shrine_01",  -- Seething Opal of Equipment
-    "S06_RealmWalker_DungeonOfHatred_Shrine_02",  -- Seething Opal of Socketables
-    "S06_RealmWalker_DungeonOfHatred_Shrine_03",  -- Seething Opal of Materials
-    "S06_RealmWalker_DungeonOfHatred_Shrine_04",  -- Seething Opal of Torment
+    "S06_Realmwalker_ConsumableBuff_00",  -- Seething Opal of Gold
+    "S06_RealmWalker_ConsumableBuff_01",  -- Seething Opal of Equipment
+    "S06_RealmWalker_ConsumableBuff_02",  -- Seething Opal of Socketables
+    "S06_RealmWalker_ConsumableBuff_03",  -- Seething Opal of Materials
+    "S06_RealmWalker_ConsumableBuff_04",  -- Seething Opal of Torment
   },
 
   --- Tier 1 elixir display names
@@ -112,22 +112,22 @@ local consumable_options = {
 
   --- Tier 1 incense display names
   t1_incense_names = {
-    "Ancient Times",
-    "Blessed Guide",
+    "Storm of the Wilds",
     "Desert Escape",
-    "Queen's Supreme",
-    "Sage's Whisper",
     "Song of the Mountain",
     "Spirit Dance",
-    "Storm of the Wilds",
+    "Ancient Times",
+    "Sage's Whisper",
+    "Queen's Supreme",
+    "Blessed Guide",
   },
 
   --- Tier 2 incense display names
   t2_incense_names = {
     "Reddamine Buzz",
-    "Scents of the Desert Afternoon",
     "Soothing Spices",
     "Spiral Morning",
+    "Scents of the Desert Afternoon",
   },
 
   --- Tier 3 incense display names
@@ -137,11 +137,11 @@ local consumable_options = {
   },
   --- Opal display names
   opal_names = {
-    "Seething Opal of Gold",
-    "Seething Opal of Equipment",
-    "Seething Opal of Socketables",
-    "Seething Opal of Materials",
-    "Seething Opal of Torment",
+    "Opal of Gold",
+    "Opal of Equipment",
+    "Opal of Socketables",
+    "Opal of Materials",
+    "Opal of Torment",
   },
 }
 
