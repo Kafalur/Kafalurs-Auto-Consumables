@@ -1,18 +1,19 @@
---- @class ConsumableManager
---- @description Manages consumable items including elixirs, incenses, and opals
+--- ConsumableManager
+--- Manages automatic usage of consumable items including elixirs, incenses, and opals.
+--- Handles buff tracking, cooldowns, and selective usage based on menu settings.
 
 local menu = require("menu")
 local options = require("data.consumable_options")
 
---- Time tracking for potion usage cooldown
+--- Global cooldown tracking for consumable usage
 local last_potion_use_time = 0
---- Cooldown duration between potion uses (in seconds)
+--- Minimum time between consumable uses (in seconds)
 local potion_cooldown = 0.2
 
---- Checks for a specific buff on the player
---- @param buffs Buff[] Array of current player buffs
---- @param option string The buff name to search for
---- @return number Number of matching buffs found
+--- Counts how many instances of a specific buff are active on the player
+--- @param buffs Buff[] List of all active player buffs
+--- @param option string Name of the buff to check for
+--- @return number Count of matching buff instances
 local function check_for_player_buff(buffs, option)
   local count = 0
   for _, buff in ipairs(buffs) do
@@ -23,7 +24,7 @@ local function check_for_player_buff(buffs, option)
   return count
 end
 
---- Uses an item if cooldown period has elapsed
+--- Attempts to use an item while respecting the global cooldown
 --- @param item Item The consumable item to use
 --- @return nil
 local function execute_with_cooldown(item)
@@ -34,19 +35,19 @@ local function execute_with_cooldown(item)
   end
 end
 
---- Checks and uses consumables if conditions are met
---- @param elixir_options string[] Available consumable options
---- @param chosen_index number Selected option index (0-based)
---- @param elixir_toggle boolean Whether usage is enabled
+--- Core consumable usage logic shared by all consumable types
+--- @param consumable_options string[] List of possible consumable names
+--- @param chosen_index number Currently selected option in the menu (0-based)
+--- @param usage_toggle boolean Whether this consumable type is enabled
 --- @param buffs Buff[] Current player buffs
---- @param consumable_items Item[] Available consumable items
+--- @param consumable_items Item[] Available consumable items in inventory
 --- @return nil
-local function check_consumables(elixir_options, chosen_index, elixir_toggle, buffs, consumable_items)
-  if elixir_toggle then
-    local elixir_name = elixir_options[chosen_index + 1]
-    if check_for_player_buff(buffs, elixir_options[chosen_index + 1]) < 1 then
+local function check_consumables(consumable_options, chosen_index, usage_toggle, buffs, consumable_items)
+  if usage_toggle then
+    local consumable_name = consumable_options[chosen_index + 1]
+    if check_for_player_buff(buffs, consumable_name) < 1 then
       for _, item in ipairs(consumable_items) do
-        if item:get_name() == elixir_options[chosen_index + 1] then
+        if item:get_name() == consumable_name then
           execute_with_cooldown(item)
         end
       end
@@ -54,8 +55,8 @@ local function check_consumables(elixir_options, chosen_index, elixir_toggle, bu
   end
 end
 
---- Searches inventory for and uses temper items
---- @param inventory Item[] Player's inventory items
+--- Checks for and uses temper items in the inventory
+--- @param inventory Item[] Complete list of inventory items
 --- @return nil
 local function check_inventory(inventory)
   for _, item in ipairs(inventory) do
@@ -65,7 +66,8 @@ local function check_inventory(inventory)
   end
 end
 
---- Manages elixir buff maintenance
+--- Manages elixir usage based on menu settings
+--- Only one tier of elixir can be active at a time
 --- @param buffs Buff[] Current player buffs
 --- @param consumable_items Item[] Available consumable items
 --- @return nil
@@ -78,12 +80,13 @@ local function check_elixirs(buffs, consumable_items)
   for _, elixir in ipairs(elixir_types) do
     if elixir.toggle then
       check_consumables(elixir.options, elixir.chosen, elixir.toggle, buffs, consumable_items)
-      break -- Only use one type of elixir
+      break -- Only use one tier of elixir
     end
   end
 end
 
---- Manages incense buff maintenance
+--- Manages incense usage based on menu settings
+--- Multiple tiers of incense can be active simultaneously
 --- @param buffs Buff[] Current player buffs
 --- @param consumable_items Item[] Available consumable items
 --- @return nil
@@ -101,25 +104,27 @@ local function check_incenses(buffs, consumable_items)
   end
 end
 
---- Manages opal buff maintenance
+--- Manages opal usage based on menu settings
+--- Only one type of opal can be active at a time
 --- @param buffs Buff[] Current player buffs
 --- @param consumable_items Item[] Available consumable items
 --- @return nil
 local function check_opals(buffs, consumable_items)
-  if menu.elements.opal_toggle:get() then
-    local chosen_opal = options.opal_options[menu.elements.opal_combo:get() + 1]
-    if check_for_player_buff(buffs, chosen_opal) < 1 then
-      for _, item in ipairs(consumable_items) do
-        if item:get_name() == chosen_opal then
-          execute_with_cooldown(item)
-        end
-      end
+  local opal_types = {
+    {toggle = menu.elements.opal_toggle:get(), options = options.opal_options, chosen = menu.elements.opal_combo:get()}
+  }
+
+  for _, opal in ipairs(opal_types) do
+    if opal.toggle then
+      check_consumables(opal.options, opal.chosen, opal.toggle, buffs, consumable_items)
+      break  -- Only use one type of opal
     end
   end
 end
 
---- Main update callback function.
---- Handles player state checking and consumable management.
+--- Main update loop
+--- Checks player state and manages all consumable usage
+--- Only activates consumables when a target is within range
 on_update(function()
   local local_player = get_local_player()
 
@@ -141,5 +146,5 @@ on_update(function()
   end
 end)
 
---- Menu render callback function.
+--- Renders the configuration menu
 on_render_menu(menu.render)
