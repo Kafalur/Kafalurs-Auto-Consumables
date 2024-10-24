@@ -39,7 +39,7 @@ menu.elements = {
 }
 
 function menu.render()
-  if not menu.elements.main_tree:push("Auto Consumables") then
+  if not menu.elements.main_tree:push("KafalursAuto Consumables") then
     return
   end
 
