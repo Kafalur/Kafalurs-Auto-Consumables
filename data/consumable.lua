@@ -12,6 +12,7 @@ local Consumables = {
         {name = "Elixir of Precision", options = "Elixir_Precision_1", snoid = 1066499, powerup = 1060735},
         {name = "Elixir of Resourcefulness", options = "Elixir_MaxResource", snoid = 701382, powerup = 1865985},
         {name = "Elixir of Shadow Resistance", options = "Elixir_ShadowResist_2", snoid = 1067052, powerup = 1865979},
+        {name = "Elixir of Elemental Resistance", options = "Elixir_ElementalResist_1", snoid = 1066764, powerup = 1060709},
     },
 
     t2_elixirs = {
@@ -26,6 +27,7 @@ local Consumables = {
         {name = "Elixir of Precision II", options = "Elixir_Precision_5", snoid = 1066737, powerup = 1062886},
         {name = "Elixir of Resourcefulness II", options = "Elixir_Resources_2", snoid = 1841178, powerup = 1844960},
         {name = "Elixir of Shadow Resistance II", options = "Elixir_ShadowResist_5", snoid = 1067122, powerup = 1060730},
+        {name = "Elixir of Elemental Resistance II", options = "Elixir_ElementalResist_5", snoid = 1066766, powerup = 1060711},
     },
 
     t1_incense = {
