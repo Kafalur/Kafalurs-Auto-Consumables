@@ -53,7 +53,7 @@ local Consumables = {
     opals = {
         {name = "Seething Opal of Equipment", options = "S06_Realmwalker_ConsumableBuff_01", snoid = 2072996, powerup = 2040680},
         {name = "Seething Opal of Gold", options = "S06_Realmwalker_ConsumableBuff_00", snoid = 2072959, powerup = 2042766},
-        {name = "Seething Opal of Materials", options = "S06_Realmwalker_ConsumableBuff_03", snoid = 2073000, powerup = 2042755},
+        {name = "Seething Opal of Materials", options = "S06_Realmwalker_ConsumableBuff_03", snoid = 2073000, powerup = 2072986},
         {name = "Seething Opal of Socketed", options = "S06_Realmwalker_ConsumableBuff_02", snoid = 2072998, powerup = 2042755},
         {name = "Seething Opal of Torment", options = "S06_Realmwalker_ConsumableBuff_04", snoid = 2073002, powerup = 2072988},
     }
