@@ -16,6 +16,9 @@ local function remove_prefix(names, prefix)
     for _, name in ipairs(names) do
         result[#result + 1] = name:gsub("^" .. prefix, "")
     end
+    if prefix:find("Opal") then
+        table.insert(result, 1, "Any")  -- Add "Any" as the first option only for Opals
+    end
     return result
 end
 
@@ -79,7 +82,7 @@ function menu.render()
   -- Opals
   if menu.elements.opal_tree:push("Opals") then
     menu.elements.opal_toggle:render("Opal Toggle", "Toggles Opal Potions on/off")
-    menu.elements.opal_combo:render("Opals", remove_prefix(extract_names(consumables.opals), "Seething Opal of "), "Which opal do you want to use?")
+    menu.elements.opal_combo:render("Opals", remove_prefix(extract_names(consumables.opals), "Seething Opal of "), "Which opal do you want to use? Select 'Any' to use the first available opal.")
     menu.elements.opal_tree:pop()
   end
 
