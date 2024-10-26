@@ -1,6 +1,7 @@
-local plugin_label = "AUTO_CONSUMABLES"
 local menu = {}
 local consumables = require("data.consumable")
+local plugin_version = "1.0.2"
+local plugin_label = "Auto Consumables | Kafalur | V" .. plugin_version
 
 -- Create name arrays from the consumable tables
 local function extract_names(consumable_table)
@@ -47,7 +48,7 @@ menu.elements = {
 }
 
 function menu.render()
-  if not menu.elements.main_tree:push("Kafalurs Auto Consumables") then
+  if not menu.elements.main_tree:push(plugin_label) then
     return
   end
 
