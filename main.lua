@@ -22,7 +22,25 @@ local function check_consumables(consumable_table, selected_index, buffs, consum
     if current_time - last_use_time < USE_COOLDOWN then
         return
     end
-        
+    
+    -- Handle "Any" option for opals
+    if selected_index == 0 and consumable_table == consumables.opals then
+        for _, item in ipairs(inventory_items) do
+            for _, opal in ipairs(consumable_table) do
+                if item:get_sno_id() == opal.snoid then
+                    -- Check if buff is already active
+                    local buff_count = check_for_player_buff(buffs, opal.powerup)
+                    if buff_count == 0 then
+                        loot_manager.use_item(item)
+                        last_use_time = current_time  -- Update the last use time
+                        return
+                    end
+                end
+            end
+        end
+        return
+    end
+    
     local selected_item = consumable_table[selected_index + 1]
     if not selected_item then 
         return 
