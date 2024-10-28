@@ -41,8 +41,13 @@ local function check_consumables(consumable_table, selected_index, buffs, consum
             end
         return
     end
+
+    local plus_index = 1
+    if consumable_table == consumables.opals then
+        plus_index = 0
+    end
     
-    local selected_item = consumable_table[selected_index + 1]
+    local selected_item = consumable_table[selected_index + plus_index]
     if not selected_item then 
         return 
     end
